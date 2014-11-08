@@ -1,5 +1,7 @@
 <?php
 session_start();
+include 'connection.php';
+require_once 'admin_nav_bar.php';
 if(isset($_SESSION['aid']))
 {
 ?>
@@ -10,8 +12,6 @@ if(isset($_SESSION['aid']))
 <body>
 	<header>
 		<h1>ADMINISTRATOR</h1>
-		<div><a href="logout.php">Logout</a></div>
-		<div><a href="administrator.php">Home</a></div>
 	</header>
 	<section>
 		<form method="post" action="add_instructor.php">
@@ -32,11 +32,11 @@ if(isset($_SESSION['aid']))
 			<select name="instructor_course" id="instructor_course">
 			<?php
 			//<input type="textbox" name="instructor_course" id="instructor_course">
-			$con=mysqli_connect("localhost","root","bhar3728","project");
+			/*$con=mysqli_connect("localhost","root","","project");
 			if (mysqli_connect_errno())
   			{
   				echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  			}
+  			}*/
   			$sql="SELECT * FROM course";
 			if ($result=mysqli_query($con,$sql))
 			{
@@ -76,11 +76,11 @@ if(isset($_SESSION['aid']))
 	}
 	</script>
 <?php
-	$con=mysqli_connect("localhost","root","bhar3728","project");
+	/*$con=mysqli_connect("localhost","root","","project");
 	if (mysqli_connect_errno())
   	{
   		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  	}
+  	}*/
 	if(isset($_POST['execute']) && !empty($_POST['instructor_id']) && !empty($_POST['instructor_password']) && !empty($_POST['instructor_name']) && !empty($_POST['instructor_course']) && strcmp($_POST['query'], "add") == 0 )
 	{
 		

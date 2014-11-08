@@ -1,6 +1,8 @@
 
 <?php
 session_start();
+include 'connection.php';
+require_once 'admin_nav_bar.php';
 if(isset($_SESSION['aid']))
 {
 ?>
@@ -11,8 +13,6 @@ if(isset($_SESSION['aid']))
 <body>
 	<header>
 		<h1>ADMINISTRATOR</h1>
-		<div><a href="logout.php">Logout</a></div>
-		<div><a href="administrator.php">Home</a></div>
 	</header>
 	<section>
 		<form method="post" action="add_courses.php">
@@ -29,8 +29,6 @@ if(isset($_SESSION['aid']))
 			<input type="radio" name="query" id="add" value="add" onclick="check()">
 			<span>Delete Course</span>
 			<input type="radio" name="query" id="delete" value="delete" onclick="check()">
-			<span>Update Course</span>
-			<input type="radio" name="query" id="update" value="update" onclick="check()">
 			</div>
 			<div>
 				<input type="submit" name="execute" value="Execute">
@@ -46,18 +44,18 @@ if(isset($_SESSION['aid']))
 		{
 			document.getElementById("course_name").disabled = true;	
 		}
-		if(document.getElementById("add").checked == true || document.getElementById("update").checked == true)
+		if(document.getElementById("add").checked == true)
 		{
 			document.getElementById("course_course").disabled = false;
 		}
 	}
 	</script>
 <?php
-	$con=mysqli_connect("localhost","root","bhar3728","project");
+	/*$con=mysqli_connect("localhost","root","","project");
 	if (mysqli_connect_errno())
   	{
   		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  	}
+  	}*/
 	if(isset($_POST['execute']) && !empty($_POST['course_id']) && !empty($_POST['course_name'])  && strcmp($_POST['query'], "add") == 0 )
 	{
 		
@@ -65,14 +63,6 @@ if(isset($_SESSION['aid']))
 			echo $sql;
 			mysqli_query($con,$sql);
 			header('Location: administrator.php');
-		
-	}
-	if(isset($_POST['execute']) && !empty($_POST['course_id']) && !empty($_POST['course_name'])  && strcmp($_POST['query'], "update") == 0 )
-	{
-		
-			$sql="UPDATE course SET name = '". $_POST['course_name'] .  "' WHERE course_id = '".$_POST['course_id']."' ;";
-			mysqli_query($con,$sql);
-			echo $sql;
 		
 	}
 	if(isset($_POST['execute']) && strcmp($_POST['query'], "delete") == 0 )

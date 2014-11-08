@@ -1,5 +1,7 @@
 <?php
 session_start();
+include 'connection.php';
+require_once 'admin_nav_bar.php';
 if(isset($_SESSION['aid']))
 {
 ?>
@@ -10,7 +12,6 @@ if(isset($_SESSION['aid']))
 <body>
 	<header>
 		<h1>ADMINISTRATOR</h1>
-		<div><a href="logout.php">Logout</a></div>
 	</header>
 	<section>
 		<form action="administrator.php" method="POST">
@@ -29,7 +30,7 @@ if(isset($_SESSION['aid']))
 <?php
 	if(isset($_POST['show_instructors']))
 	{
-		$con=mysqli_connect("localhost","root","bhar3728","project");
+		//$con=mysqli_connect("localhost","root","bhar3728","project");
 		// Check connection
 		if (mysqli_connect_errno())
   			echo "Failed to connect to MySQL: " . mysqli_connect_error();

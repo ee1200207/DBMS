@@ -20,11 +20,7 @@
 <body>
 
 <ul>
-    <li><a href="student.php">Home</a>&nbsp;&nbsp;&nbsp;  </li>
-    <li><a href="student_courses.php">Courses</a>&nbsp;&nbsp;&nbsp;  </li>
-
-
-
+    <li><a href="administrator.php">Home</a>&nbsp;&nbsp;&nbsp;  </li>
     <li class="logout"><a href="logout.php">Logout</a> </li>
 
 </ul>

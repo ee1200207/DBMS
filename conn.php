@@ -1,7 +1,6 @@
 <?php 
 
-$con=mysqli_connect("localhost","root","bhar3728","project");
-// Check connection
+include 'connection.php';
 if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -38,7 +37,8 @@ if ($result=mysqli_query($con,$sql))
   		}
   		else 
   		{
-  	  		echo "SORRY... YOU ENTERD WRONG ID AND PASSWORD... PLEASE RETRY..."; 
+  	  		echo "SORRY... YOU ENTERD WRONG ID AND PASSWORD... PLEASE RETRY...";
+            echo "<br><a href=\"index.html \"> Go back</a>";
   		}
   mysqli_free_result($result);
   }
