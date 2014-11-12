@@ -1,10 +1,22 @@
 <?php
 // Connect to the database
 	include 'connection.php';
+	require_once 'instructor_nav_bar.php';
 	if(mysqli_connect_errno()) {
     	    die("MySQL connection failed: ". mysqli_connect_error());
 	}
-
+?>
+<!DOCTYPE html>
+<head>
+<title>
+Instructor
+</title>
+</head>
+<body>
+<section>
+<div>
+<br>
+<?php
 	// Query for a list of all existing files
    $id = $_GET['id'];
 	$sql = 'SELECT * FROM project where course_id ="'.$id.'"';
@@ -58,3 +70,7 @@
 	// Close the mysql connection
 	$con->close();
 ?>
+</div>
+</section>
+</body>
+</html>

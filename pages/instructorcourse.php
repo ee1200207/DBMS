@@ -60,7 +60,7 @@ if(isset($_POST['add']))
     if ($result=mysqli_query($con,$sql))
     {
         $obj = mysqli_fetch_object($result);
-        $sql="INSERT INTO instructor VALUES(" . $obj->id . ",'" . $obj->password . "','". $obj->name . "','" . $_POST['course_id'] . "');";
+        $sql="INSERT INTO instructor VALUES(" . $obj->id . ",'" . $obj->password . "','". $obj->name . "','" . $_POST['course_id'] . "','".$obj->email."','".$obj->department."');";
         mysqli_query($con,$sql);
     }
 }
@@ -80,7 +80,7 @@ if(isset($_POST['instructoradd']) || isset($_POST['add']) || isset($_POST['delet
         {
             if($i==0)
             {
-                echo "<div><form method='post' action='instructorcourse.php'><span>ID: ".$obj->id ."</span><span>Name: </span><input type='textbox' name='uname' value='".$obj->name ."'/><span>Password: </span><input type='textbox' name='upassword' value='".$obj->password."'/></span><br><input type='hidden' name='instructorid' value='".$_POST['instructorid']."'/><input type='submit' name='update' value='Update'><input type='submit' name='idelete' value='Delete Instructor'></form></div><div><span>Courses: </span></div>";
+                echo "<div><form method='post' action='instructorcourse.php'><span>ID: ".$obj->id ."</span><span>Name: </span><input type='textbox' name='uname' value='".$obj->name ."'/><span>Password: </span><input type='textbox' name='upassword' value='".$obj->password."'/><span>Email: </span><input type='textbox' name='uemail' value='".$obj->email."'/><span>Department: </span><input type='textbox' name='udepartment' value='".$obj->department."'/></span><br><input type='hidden' name='instructorid' value='".$_POST['instructorid']."'/><input type='submit' name='update' value='Update'><input type='submit' name='idelete' value='Delete Instructor'></form></div><div><span>Courses: </span></div>";
             }
             echo "<div><span> $obj->Course_ID</span></div>";
             $i++;
@@ -89,7 +89,7 @@ if(isset($_POST['instructoradd']) || isset($_POST['add']) || isset($_POST['delet
 }
 if(isset($_POST['update']))
 {
-    $sql="UPDATE instructor SET name = '".$_POST['uname']."' , password='".$_POST['upassword']."' WHERE id = ".$_POST['instructorid'].";";
+    $sql="UPDATE instructor SET name = '".$_POST['uname']."' , password='".$_POST['upassword']."' , department = '".$_POST['udepartment']."' , email = '".$_POST['uemail']."' WHERE id = ".$_POST['instructorid'].";";
     //echo $sql;
     mysqli_query($con,$sql);
     header("Location: administrator.php");

@@ -69,6 +69,14 @@ if(isset($_SESSION['aid']))
             <input type='text' name='studentrollno'/>
         </div>
         <div>
+            <span>Department</span>
+            <input type='text' name='studentdepartment'/>
+        </div>
+        <div>
+            <span>Year</span>
+            <input type='text' name='studentyear'/>
+        </div>
+        <div>
             <input type="submit" name="adds" value="Add Student">
             <input type="submit" name="updates" value="Update Student">
             <input type="submit" name="deletes" value="Delete Student">
@@ -102,7 +110,7 @@ if(isset($_POST['add']))
         //echo $num1;
         if($obj->course_id && $num1==0)
         {
-            $sql="INSERT INTO student VALUES(".$obj->rollno . ",'".$obj->name."','" . $obj->password . "',". $obj->id . ",'" . $_POST['course_id'] . "',NULL);";
+            $sql="INSERT INTO student VALUES(".$obj->rollno . ",'".$obj->name."','" . $obj->password . "',". $obj->id . ",'" . $_POST['course_id'] . "',NULL,'".$obj->department."',".$obj->year.");";
             mysqli_query($con,$sql);
             //echo $sql;
         }
@@ -150,7 +158,7 @@ if(isset($_POST['adds']))
         //echo $num1;
         if($num1==0)
         {
-            $sql="INSERT INTO student VALUES(".$_POST['studentrollno'] . ",'".$_POST['studentname']."','" . $_POST['studentpass'] . "',". $_POST['studentid'] . ",NULL,NULL);";
+            $sql="INSERT INTO student VALUES(".$_POST['studentrollno'] . ",'".$_POST['studentname']."','" . $_POST['studentpass'] . "',". $_POST['studentid'] . ",NULL,NULL,'".$_POST['studentdepartment']."',".$_POST['studentyear'].");";
             mysqli_query($con,$sql);
             //echo $sql;
         }
@@ -163,17 +171,17 @@ if(isset($_POST['deletes']))
 }
 if(isset($_POST['updates']))
 {
-    $sql="UPDATE student SET name = '".$_POST['studentname'] . "' , password = '".$_POST['studentpass']."' , rollno = ".$_POST['studentrollno'] ." WHERE id = ". $_POST['studentid'] . " ;";
+    $sql="UPDATE student SET name = '".$_POST['studentname'] . "' , password = '".$_POST['studentpass']."' , rollno = ".$_POST['studentrollno'] .", department =  '" . $_POST['studentdepartment']."' , year = ". $_POST['studentyear']." WHERE id = ". $_POST['studentid'] . " ;";
     mysqli_query($con,$sql);
 }
 if(isset($_POST['show']))
 {
     $sql="SELECT * FROM student GROUP BY course_id,id ORDER BY id;";
     $result = mysqli_query($con,$sql);
-    echo "<div><table><tr><th>ID</th><th>Roll No</th><th>Name</th><th>Password</th><th>Course ID</th></tr>";
+    echo "<div><table><tr><th>ID</th><th>Roll No</th><th>Name</th><th>Password</th><th>Course ID</th><th>Department</th><th>Year</th></tr>";
     while($obj = mysqli_fetch_object($result))
     {
-        echo "<tr><td>".$obj->id."</td><td>".$obj->rollno."</td><td>".$obj->name."</td><td>".$obj->password."</td><td>".$obj->course_id."</td></tr>";
+        echo "<tr><td>".$obj->id."</td><td>".$obj->rollno."</td><td>".$obj->name."</td><td>".$obj->password."</td><td>".$obj->course_id."</td><td>".$obj->department."</td><td>".$obj->year."</td></tr>";
     }
     echo "</table></div>";
 }

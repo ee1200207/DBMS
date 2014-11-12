@@ -25,13 +25,15 @@
 	                $row = mysqli_fetch_assoc($result);
 
 	                // Print headers
-	                header("Project ID: ". $row['project_id']);
-	                header("Student ID: ". $row['student_id']);
-                    header("Course ID: ".$row['course_id']);
-	                header("Content-Disposition: attachment; filename=". $row['filename']);
+	               // header("Project ID: ". $row['project_id']);
+	               //header("Student ID: ". $row['student_id']);
+                   // header("Course ID: ".$row['course_id']);
+	            header("Content-type: ".$row['filetype']);
+				header("Content-length: ".$row['size']);
+	            header("Content-Disposition: attachment; filename=". $row['filename']);
 
                 // Print data
-	                echo $row['data'];
+	                echo $row['file'];
 	            }
 	            else {
                 	                echo 'Error! No file exists with that ID.';

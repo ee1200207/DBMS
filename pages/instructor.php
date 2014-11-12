@@ -60,12 +60,42 @@ if(isset($_SESSION['iid']))
         <br>
     </span>
     <span>
-        Email-ID<br>
+        Email-ID : 
+        <?php
+        $sql = "SELECT * FROM instructor where id = ".$id." ";
+        if($result = mysqli_query($con,$sql))
+        {
+            if($row=mysqli_fetch_array($result,MYSQLI_ASSOC))
+            {
+                echo $row["email"];
+            }
+            else
+                echo "No rows fetched";
+        }
+        else
+            echo "Result unsuccessful";
+
+        ?>
+        <br>
     </span>
     <span>
-        Department <br>
+        Department : 
+        <?php
+        $sql = "SELECT * FROM instructor where id = ".$id." ";
+        if($result = mysqli_query($con,$sql))
+        {
+            if($row=mysqli_fetch_array($result,MYSQLI_ASSOC))
+            {
+                echo $row["department"];
+            }
+            else
+                echo "No rows fetched";
+        }
+        else
+            echo "Result unsuccessful";
+        ?>
     </span>
-
+    <br>
     </div>
 
 </body>

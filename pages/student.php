@@ -71,40 +71,21 @@ if(isset($_SESSION['sid']))
         <br>
     </span>
     <span>
-       <strong> Phone-number </strong>
-        <?php
-
-       /* $sql = "SELECT * FROM student where id = '".$id."' ";
-        if($result = mysqli_query($con,$sql))
-        {
-            if($row=mysqli_fetch_array($result,MYSQLI_ASSOC) )
-            {
-                echo $row[0];
-            }
-            else
-                echo "No rows fetched";
-        }
-        else
-            echo "Result unsuccesful";*/
-        ?>
-        <br>
-    </span>
-    <span>
       <strong>  Department </strong>
         <?php
 
-       /* $sql = "SELECT * FROM student where id = '".$id."' ";
+        $sql = "SELECT * FROM student where id = '".$id."' ";
         if($result = mysqli_query($con,$sql))
         {
             if($row=mysqli_fetch_array($result,MYSQLI_ASSOC) )
             {
-                echo $row[0];
+                echo $row['department'];
             }
             else
                 echo "No rows fetched";
         }
         else
-            echo "Result unsuccesful";*/
+            echo "Result unsuccesful";
         ?>
         <br>
     </span>
@@ -112,18 +93,18 @@ if(isset($_SESSION['sid']))
      <strong>   Year </strong>
         <?php
 
-       /* $sql = "SELECT * FROM student where id = '".$id."' ";
+       $sql = "SELECT * FROM student where id = '".$id."' ";
         if($result = mysqli_query($con,$sql))
         {
             if($row=mysqli_fetch_array($result,MYSQLI_ASSOC) )
             {
-                echo $row[0];
+                echo $row['year'];
             }
             else
                 echo "No rows fetched";
         }
         else
-            echo "Result unsuccesful";*/
+            echo "Result unsuccesful";
         ?>
         <br>
     </span>

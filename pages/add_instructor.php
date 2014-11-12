@@ -28,6 +28,14 @@ if(isset($_SESSION['aid']))
 			<input type="textbox" name="instructor_name" id="instructor_name">
 			</div>
 			<div>
+			<span>Department</span>
+			<input type="textbox" name="instructor_department" id="instructor_department">
+			</div>
+			<div>
+			<span>email</span>
+			<input type="textbox" name="instructor_email" id="instructor_email">
+			</div>
+			<div>
 			<span>Course ID</span>
 			<select name="instructor_course" id="instructor_course">
 			<?php
@@ -65,13 +73,17 @@ if(isset($_SESSION['aid']))
 		{
 			document.getElementById("instructor_password").disabled = true;
 			document.getElementById("instructor_name").disabled = true;
-			document.getElementById("instructor_course").disabled = true;	
+			document.getElementById("instructor_course").disabled = true;
+			document.getElementById("instructor_email").disabled = true;
+			document.getElementById("instructor_department").disabled = true;	
 		}
 		if(document.getElementById("add").checked == true)
 		{
 			document.getElementById("instructor_name").disabled = false;
 			document.getElementById("instructor_course").disabled = false;
 			document.getElementById("instructor_password").disabled = false;	
+			document.getElementById("instructor_email").disabled = false;
+			document.getElementById("instructor_department").disabled = false;
 		}
 	}
 	</script>
@@ -90,7 +102,7 @@ if(isset($_SESSION['aid']))
 			$rowcount = mysqli_num_rows($result);
 			if( $rowcount == 0)
 			{
-				$sql="INSERT INTO instructor VALUES(" . $_POST['instructor_id'] . ",'" . $_POST['instructor_password'] . "','". $_POST['instructor_name'] . "','" . $_POST['instructor_course'] . "');";
+				$sql="INSERT INTO instructor VALUES(" . $_POST['instructor_id'] . ",'" . $_POST['instructor_password'] . "','". $_POST['instructor_name'] . "','" . $_POST['instructor_course'] . "','".$_POST['instructor_email']."','".$_POST['instructor_department']."');";                                    
 				mysqli_query($con,$sql);
 				header('Location: administrator.php');
 			}
