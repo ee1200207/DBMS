@@ -3,29 +3,42 @@
 	<title>
 	Project Repositry - Login
 	</title>
+	 <link href="css/bootstrap.min.css" rel="stylesheet">
+	 <link href="css/main.css" rel="stylesheet">
+	  <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<header></header>
+	<header>
+		<h1>Login</h1>
+	</header>
 	<section>
 	<form method="POST" action="conn.php">
-		<div>
+		<div class="form-group" id="a">
+		<div class="container" id = "c">
 			<span>Username</span>
-			<input type="textbox" id="username" name="username"/>
+			<input type="textbox" id="username" name="username" class="form-control"/>
 		</div>
-		<div>
+		<div class="container" id = "b">
 			<span>Password</span>
-			<input type="password" id="password" name="password"/>
+			<input type="password" id="password" name="password" class="form-control"/>
 		</div>
-		<div>
-			<span>Student</span>
-			<input type="radio" name = "usertype" value = "student">
-			<span>Instructor</span>
-			<input type="radio" name = "usertype" value = "instructor">
-			<span>Administrator</span>
-			<input type="radio" name = "usertype" value = "administrator">
+		<div class="container" id="d">
+			<div class="buttons">
+			<span class="radioelements">Student</span>
+			<input type="radio" name = "usertype" value = "student" class="radio">
+			</div>
+			<div class="buttons">
+			<span class="radioelements">Instructor</span>
+			<input type="radio" name = "usertype" value = "instructor" class="radio">
+			</div>
+			<div class="buttons">
+			<span class="radioelements">Administrator</span>
+			<input type="radio" name = "usertype" value = "administrator" class="radio">
+			</div>
 		</div>
-		<div>
-			<input type="submit" id="submit" name="submit" value="Submit" />
+		<div class="container" >
+			<input type="submit" id="submit" name="submit" value="Submit" class="btn btn-default"/>
+		</div>
 		</div>
 
 	</form>

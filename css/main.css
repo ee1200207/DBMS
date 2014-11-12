@@ -1,0 +1,46 @@
+body{
+	width: 90%;
+	height: 100%;
+	margin: 0px auto;
+}
+.login{
+	width: 90px;
+}
+#a{
+	width: 50%;
+	margin: 100px auto;
+}
+#b{
+	width: 100%;
+	
+}
+#c{
+	width: 100%;
+}
+#d{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.buttons{
+	float: left;
+	width: 150px;
+}
+.radio{
+	float: left;
+	margin: 8px;
+}
+.radioelements{
+	margin-left: 10px;
+}
+#x{
+	width: 25%;
+	margin-top:5px;
+	margin-left: 37%;
+}
+header{
+	margin: 20px auto;
+	text-align: center;
+}
+section{
+	margin: 20px auto;
+}
