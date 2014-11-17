@@ -103,14 +103,15 @@ if(isset($_POST['add']))
     if ($result=mysqli_query($con,$sql))
     {
         $obj = mysqli_fetch_object($result);
+        
         $sql="SELECT * FROM student WHERE id = ".$_POST['studentid'] ." and course_id = '".$_POST['course_id']."';";
-        //echo $sql;
         if($result1=mysqli_query($con,$sql))
             $num1 = mysqli_num_rows($result1);
-        //echo $num1;
+    if($obj)    //echo $num1;
+    {  
         if($obj->course_id && $num1==0)
         {
-            $sql="INSERT INTO student VALUES(".$obj->rollno . ",'".$obj->name."','" . $obj->password . "',". $obj->id . ",'" . $_POST['course_id'] . "',NULL,'".$obj->department."',".$obj->year.");";
+            $sql="INSERT INTO student VALUES(".$obj->rollno . ",'".$obj->name."','" . $obj->password . "',". $obj->id . ",'" . $_POST['course_id'] . "','0','".$obj->department."',".$obj->year.");";
             mysqli_query($con,$sql);
             //echo $sql;
         }
@@ -120,6 +121,7 @@ if(isset($_POST['add']))
             mysqli_query($con,$sql);
             //echo $sql;
         }
+    }
     }
 }
 if(isset($_POST['delete']))
@@ -141,7 +143,7 @@ if(isset($_POST['delete']))
             }
             else
             {
-                $sql="UPDATE student SET course_id = NULL WHERE id = ". $_POST['studentid']  .";";
+                $sql="UPDATE student SET course_id = '0' , project_id = '0' WHERE id = ". $_POST['studentid']  .";";
                 mysqli_query($con,$sql);
             }
         }
@@ -158,7 +160,7 @@ if(isset($_POST['adds']))
         //echo $num1;
         if($num1==0)
         {
-            $sql="INSERT INTO student VALUES(".$_POST['studentrollno'] . ",'".$_POST['studentname']."','" . $_POST['studentpass'] . "',". $_POST['studentid'] . ",NULL,NULL,'".$_POST['studentdepartment']."',".$_POST['studentyear'].");";
+            $sql="INSERT INTO student VALUES(".$_POST['studentrollno'] . ",'".$_POST['studentname']."','" . $_POST['studentpass'] . "',". $_POST['studentid'] . ",'0','0','".$_POST['studentdepartment']."',".$_POST['studentyear'].");";
             mysqli_query($con,$sql);
             //echo $sql;
         }

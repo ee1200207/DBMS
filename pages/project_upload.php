@@ -68,26 +68,27 @@ if(isset($_SESSION['sid']))
         //echo $projid;
         if($_FILES['userfile']['name'])
         {
-            $fileName = $_FILES['userfile']['name'];
-            $tmpName  = $_FILES['userfile']['tmp_name'];
-            $fileSize = $_FILES['userfile']['size'];
-            $fileType = $_FILES['userfile']['type'];
+            $fileName = mysqli_real_escape_string($con,$_FILES['userfile']['name']);
+            $content  = mysqli_real_escape_string($con,file_get_contents($_FILES['userfile']['tmp_name']));
+            $fileSize = mysqli_real_escape_string($con,$_FILES['userfile']['size']);
+            $fileType = mysqli_real_escape_string($con,$_FILES['userfile']['type']);
          //   echo $fileName." ".$fileSize." ".$fileType." ".$tmpName;
-            $fp      = fopen($tmpName, 'r');
+            /*$fp      = fopen($tmpName, 'r');
             $content = fread($fp, filesize($tmpName));
             $content = addslashes($content);
-            fclose($fp);
+            fclose($fp);*/
            // $data = $con->real_escape_string(file_get_contents($_FILES  ['uploaded_file']['tmp_name']));
-            if(!get_magic_quotes_gpc())
+            /*if(!get_magic_quotes_gpc())
             {
                 $fileName = addslashes($fileName);
-            }
+            }*/
             //$con=mysqli_connect("localhost","root","bhar3728","project");
             if (mysqli_connect_errno())
             {
                 echo "Failed to connect to MySQL: " . mysqli_connect_error();
             }
-            $query = "INSERT INTO project VALUES ('$projid',$studentid,'$_POST[course_id]','$fileName', '$fileType' , '$fileSize','$content')";
+            
+            $query = "INSERT INTO project VALUES ('".$projid."',".$studentid.",'".$_POST['course_id']."','".$fileName."', '".$fileType."' , '".$fileSize."','".$content."')";
 
             mysqli_query($con,$query) or die('Error, query failed');
             $sql = "SELECT * FROM student WHERE id = " . $studentid ." AND course_id = '".$_POST['course_id']."';" ;
@@ -100,13 +101,13 @@ if(isset($_SESSION['sid']))
                 if($num==1)
                 {
 
-                    if($obj->project_id == NULL)
+                    if(strcmp($obj->project_id ,'0') == 0 )
                     {
                         $sql1 = "UPDATE student SET project_id = '". $projid . "' WHERE id = " .$studentid. " AND course_id= '" .$_POST['course_id']. "' ; " ;
                     }
                     else
                     {
-                        $sql1 = "INSERT INTO student VALUES(".$obj->rollno . ",'".$obj->name."','" . $obj->password . "',". $obj->id . ",'" . $_POST['course_id'] . "','".$projid."');";
+                        $sql1 = "INSERT INTO student VALUES(".$obj->rollno . ",'".$obj->name."','" . $obj->password . "',". $obj->id . ",'" . $_POST['course_id'] . "','".$projid."','".$obj->department."',".$obj->year.");";
                     }
                     echo $sql1;
                     mysqli_query($con,$sql1);

@@ -1,58 +1,29 @@
-	<?php
-	// Make sure an ID was passed
-    include 'connection.php';
-	if(isset($_GET['id'])) {
-   	// Get the ID
-	    $id = $_GET['id'];
+<?php
+if(isset($_GET['id'])) 
+    {
+    $mysql_hostname = "localhost";
+	$mysql_user = "root";
+	$mysql_password = "bhar3728";
+	$mysql_database = "project";
 
-	    // Make sure the ID is in fact a valid ID
-	    if($id)
-        {
-        	        // Connect to the database
+	$con = mysqli_connect($mysql_hostname, $mysql_user, $mysql_password, $mysql_database) or die("Could not connect database");
 
-	        if(mysqli_connect_errno()) {
-            	            die("MySQL connection failed: ". mysqli_connect_error());
-	        }
+    $id = $_GET['id'];
+    
+    $q = "SELECT * FROM project WHERE project_id = '".$id."' ;";
+    
+    $result = mysqli_query($con, $q);
+    
+    while ($row = $result->fetch_assoc()) { 
+    $size = $row['size'];
+    $name = $row['filename'];
+    $type = $row['filetype'];
+    $content = $row['file'];
+    }    
+    header("Content-disposition: attachment; filename=" . $name);
+    header("Content-Type: " . $type );
+    echo $content ;
 
-	        // Fetch the file information
-	        $query ='SELECT * FROM project WHERE project_id = "'.$id.'"';
-	        $result = $con->query($query);
-
-	        if($result) {
-           	            // Make sure the result is valid
-            if($result->num_rows == 1) {
-                            // Get the row
-	                $row = mysqli_fetch_assoc($result);
-
-	                // Print headers
-	               // header("Project ID: ". $row['project_id']);
-	               //header("Student ID: ". $row['student_id']);
-                   // header("Course ID: ".$row['course_id']);
-	            header("Content-type: ".$row['filetype']);
-				header("Content-length: ".$row['size']);
-	            header("Content-Disposition: attachment; filename=". $row['filename']);
-
-                // Print data
-	                echo $row['file'];
-	            }
-	            else {
-                	                echo 'Error! No file exists with that ID.';
-	            }
-
-	            // Free the mysqli resources
-	            @mysqli_free_result($result);
-	        }
-	        else {
-          	            echo "Error! Query failed: <pre>{$con->error}</pre>";
-	        }
-	        @mysqli_close($con);
-	    }
-        else
-        {
-            die('The ID is invalid!');
-        }
-	}
-	else {
-    	    echo 'Error! No ID was passed.';
-	}
-	?>
+    exit;
+}
+?>
